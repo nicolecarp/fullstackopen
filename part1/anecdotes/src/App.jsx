@@ -20,12 +20,21 @@ const App = () => {
     const randomIndex = Math.floor(Math.random() * anecdotes.length);
     setSelected(randomIndex);
   };
+  const initialVotes = Array(anecdotes.length).fill(0);
+  const [votes, setVotes] = useState(initialVotes);
+
+  const addVote = () => {
+    const newVotes = [...votes];
+    newVotes[selected] += 1;
+    setVotes(newVotes);
+  };
 
   return (
     <div>
       {anecdotes[selected]}
       <br />
       <Button onClick={randomQuote} text="next anecdote" />
+      <Button onClick={addVote} text="vote" />
     </div>
   );
 };
